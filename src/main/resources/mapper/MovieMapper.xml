@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zxc.movie.dao.MovieMapper">
+
+   <select id="getById" resultMap="movieMap">
+        select id,movie_name,movie_url,status from movie
+   </select>
+
+   <resultMap id="movieMap" type="Movie">
+       <id property="id" column="id"/>
+       <result property="movieName" column="movie_name"/>
+       <result property="movieUrl" column="movie_url"/>
+       <result property="status" column="status"/>
+   </resultMap>
+
+</mapper>

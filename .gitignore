@@ -1,0 +1,18 @@
+*.class
+
+#package ignore
+
+*.war
+*.ear
+
+#maven ignore
+
+target/*
+
+#idea ignore
+
+.idea
+/idea/
+*.iml
+*.ipr
+*.iws
