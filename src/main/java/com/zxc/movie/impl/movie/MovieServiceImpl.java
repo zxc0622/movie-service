@@ -20,4 +20,9 @@ public class MovieServiceImpl implements MovieService {
     public Movie getById(Integer id) {
         return movieMapper.getById(id);
     }
+
+    @Override
+    public int add(Movie movie) {
+        return movieMapper.insert(movie);
+    }
 }

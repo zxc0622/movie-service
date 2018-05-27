@@ -9,13 +9,13 @@ import java.util.List;
 public interface BaseDao <T>{
 
     //插入一个对象
-    public int insert(T t);
+    public Integer insert(T t);
 
     //修改一个对象
-    public int update(T t);
+    public Integer update(T t);
 
     //删除一个对象
-    public int delete(Integer id);
+    public Integer delete(Integer id);
 
     //获取一个对象
     public T getById(Integer id);

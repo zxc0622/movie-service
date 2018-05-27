@@ -7,10 +7,14 @@
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd
 		http://code.alibabatech.com/schema/dubbo http://code.alibabatech.com/schema/dubbo/dubbo.xsd http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd">
 
+
+	<!-- 扫描了com.dubbo.api.DemoService的实现类所在包 -->
+	<context:component-scan base-package="com.zxc.movie.impl"></context:component-scan>
+
 	<!-- Spring的配置文件，这里主要配置和业务逻辑有关的 -->
 	<!--=================== 数据源，事务控制，xxx ================-->
-	<context:property-placeholder location="classpath:*.properties" />
-	<bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource">
+	<context:property-placeholder location="classpath:dbconfig.properties,rpc.properties" />
+	<bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource" destroy-method="close">
 		<property name="jdbcUrl" value="${jdbc.jdbcUrl}"></property>
 		<property name="driverClass" value="${jdbc.driverClass}"></property>
 		<property name="user" value="${jdbc.user}"></property>
@@ -32,11 +36,12 @@
 		<property name="basePackage" value="com.zxc.movie.dao"></property>
 	</bean>
 
-	<!-- 配置一个可以执行批量的sqlSession -->
+	<!-- 配置一个可以执行批量的sqlSession
 	<bean id="sqlSession" class="org.mybatis.spring.SqlSessionTemplate">
 		<constructor-arg name="sqlSessionFactory" ref="sqlSessionFactory"></constructor-arg>
 		<constructor-arg name="executorType" value="BATCH"></constructor-arg>
 	</bean>
+	-->
 
 	<!-- 事务管理器-->
 	<bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
@@ -47,9 +52,6 @@
 	<!--启用声明式事务,顺便说一下,spring默认拦截的事务方法只支持运行时异常,编译时异常不会处理-->
 	<tx:annotation-driven transaction-manager="transactionManager" order="200"></tx:annotation-driven>
 
-
-	<!-- 扫描了com.dubbo.api.DemoService的实现类所在包 -->
-	<context:component-scan base-package="com.zxc.movie.impl"></context:component-scan>
 	<!-- dubbo服务名 -->
 	<dubbo:application name="movie-provider" />
 	<!-- 绑定到 zookeeper 注册中心的地址,这个就是上面刚刚在本地启动的那个注册中心-->

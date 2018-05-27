@@ -1,0 +1,26 @@
+
+使用spring和Junit测试时需要本地开着zookpeer,因为项目和dubbo集成了，或者把spring里面跟dubbo相关的配置暂时去掉
+每次测试完提交代码的时候把测试类用 注解 @Ignore 注解一下,免得打包的时候反复执行
+
+----------------------
+
+今晚遇到的问题总结。。。。
+
+1. 使用spring和Junit进行整合时，扫描的properties文件不能使用  *.properties ，要不然会导致依赖无法注入
+
+也就是原来的
+<context:property-placeholder location="classpath:*.properties" />
+要改为
+<context:property-placeholder location="classpath:dbconfig.properties,rpc.properties" />
+
+
+2.mybatis中如果配置了一个
+
+<bean id="sqlSession" class="org.mybatis.spring.SqlSessionTemplate">
+		<constructor-arg name="sqlSessionFactory" ref="sqlSessionFactory"></constructor-arg>
+		<constructor-arg name="executorType" value="BATCH"></constructor-arg>
+	</bean>
+
+	这样的bean，主要是执行参数的  executorType 为 BATCH 时，会导致 insert,delete,update 时数据返回的影响行数一直为 -2147482646
+
+注意，注意！
