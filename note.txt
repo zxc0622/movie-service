@@ -24,3 +24,35 @@
 	这样的bean，主要是执行参数的  executorType 为 BATCH 时，会导致 insert,delete,update 时数据返回的影响行数一直为 -2147482646
 
 注意，注意！
+
+
+----------------2018/5/31 -----
+
+以往扫描 properties 文件的方式是  <!-- <context:property-placeholder location="classpath:dbconfig.properties,rpc.properties" /> -->  这样感觉有点丑，今天看到可以用另一种方式进行扫描
+
+<!-- 1.使用注解注入properties中的值 -->
+	<bean id="setting"
+		  class="org.springframework.beans.factory.config.PropertiesFactoryBean">
+		<property name="locations">
+			<list>
+				<value>classpath:dbconfig.properties</value>
+				<value>classpath:rpc.properties</value>
+			</list>
+		</property>
+		<!-- 设置编码格式 -->
+		<property name="fileEncoding" value="UTF-8"></property>
+	</bean>
+
+	<!-- 2.使其可以在配置xml文件中以 ${}方式进行引用,这样至少看起来比较好看！！-->
+	<bean id="propertyConfigurer" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<property name="ignoreResourceNotFound" value="false" />
+		<property name="properties" ref="setting" />
+	</bean>
+
+
+如果只注入第一个bean，那么只能在类中用 @Value 注解注入对应的属性中
+加了第二个bean之后可以在xml文件里面用 ${xxx} 的方式注入属性，感觉改为这样会好看点
+
+参考的博客地址  https://blog.csdn.net/hanghangde/article/details/51088985
+
+不知道这种百度而来的方法是否可行,或者应该关注下官网如何使用，反思反思!!!!

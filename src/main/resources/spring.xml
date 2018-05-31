@@ -12,8 +12,27 @@
 	<context:component-scan base-package="com.zxc.movie.impl"></context:component-scan>
 
 	<!-- Spring的配置文件，这里主要配置和业务逻辑有关的 -->
+	<!-- 不用这种方式配置了,改为下面的方式进行配置-->
+	<!-- <context:property-placeholder location="classpath:dbconfig.properties,rpc.properties" /> -->
+	<!-- 1.使用注解注入properties中的值 -->
+	<bean id="setting"
+		  class="org.springframework.beans.factory.config.PropertiesFactoryBean">
+		<property name="locations">
+			<list>
+				<value>classpath:dbconfig.properties</value>
+				<value>classpath:rpc.properties</value>
+			</list>
+		</property>
+		<!-- 设置编码格式 -->
+		<property name="fileEncoding" value="UTF-8"></property>
+	</bean>
+
+	<!-- 2.使其可以在配置xml文件中以 ${}方式进行引用,这样至少看起来比较好看！！-->
+	<bean id="propertyConfigurer" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<property name="ignoreResourceNotFound" value="false" />
+		<property name="properties" ref="setting" />
+	</bean>
 	<!--=================== 数据源，事务控制，xxx ================-->
-	<context:property-placeholder location="classpath:dbconfig.properties,rpc.properties" />
 	<bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource" destroy-method="close">
 		<property name="jdbcUrl" value="${jdbc.jdbcUrl}"></property>
 		<property name="driverClass" value="${jdbc.driverClass}"></property>
@@ -60,5 +79,6 @@
 	<dubbo:protocol name="dubbo" port="${dubbo.port}" />
 	<!-- 要让dubbo发布出来的接口, ref 指向一个实现类-->
 	<dubbo:service interface="com.zxc.movie.service.MovieService" ref="movieService" />
+
 
 </beans>
