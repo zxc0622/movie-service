@@ -1,5 +1,7 @@
 package com.zxc.movie.impl.movie;
 
+import com.zxc.movie.aop.annotation.Log;
+import com.zxc.movie.aop.annotation.LogIgnore;
 import com.zxc.movie.beans.Movie;
 import com.zxc.movie.dao.MovieMapper;
 import com.zxc.movie.service.MovieService;
@@ -11,12 +13,14 @@ import org.springframework.stereotype.Service;
  *  MovieService 基本实现类
  */
 @Service("movieService")
+@Log
 public class MovieServiceImpl implements MovieService {
 
     @Autowired
     private MovieMapper movieMapper;
 
     @Override
+    @LogIgnore
     public Movie getById(Integer id) {
         return movieMapper.getById(id);
     }

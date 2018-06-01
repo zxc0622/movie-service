@@ -12,6 +12,6 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
  */
 @Ignore
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration({"classpath:spring.xml"})
+@ContextConfiguration({"classpath:spring.xml", "classpath:springmvc.xml"})
 public class BaseTest {
 }
