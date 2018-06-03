@@ -11,6 +11,13 @@
 		<package name="com.zxc.movie.beans"></package>
 	</typeAliases>
 
+	<!-- 类似映射器包-->
+	<typeHandlers>
+		<package name="com.zxc.movie.typeHandle"></package>
+	</typeHandlers>
+
+
+
 
 </configuration>
 

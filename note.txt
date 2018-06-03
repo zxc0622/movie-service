@@ -56,3 +56,22 @@
 参考的博客地址  https://blog.csdn.net/hanghangde/article/details/51088985
 
 不知道这种百度而来的方法是否可行,或者应该关注下官网如何使用，反思反思!!!!
+
+-----2018/6/03
+mybatis对于java枚举类的映射!
+https://www.cnblogs.com/jeffen/p/6380724.html
+文章不是全对的,具体看看 com.zxc.movie.typeHandle.MovieStatusHandle 这个映射器
+得好好看看mybatis的映射器
+
+mysql的 datetime 类型不支持创建时使用now()函数，还是自己指定吧
+
+ <!-- mybatis映射java1.8日期类型LocalDate的依赖-->
+    <dependency>
+      <groupId>org.mybatis</groupId>
+      <artifactId>mybatis-typehandlers-jsr310</artifactId>
+      <version>${mybatis.date.version}</version>
+    </dependency>
+
+    dubbo与mybatis结合时有mybatis懒加载对象的问题,网上也没啥解决方案,自己再瞅瞅！
+
+

@@ -2,8 +2,16 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.zxc.movie.dao.MovieMapper">
 
+    <sql id="movie_label">
+          movie_name,movie_desc,movie_show,movie_status,movie_url,movie_photo,keep_count,create_date,update_date
+    </sql>
+
+
     <insert id="insert" useGeneratedKeys="true" keyProperty="id" parameterType="Movie">
-        insert into movie(movie_name,movie_url,status) values (#{movieName},#{movieUrl},#{status})
+        insert into movie(
+           <include refid="movie_label"></include>
+        ) values
+        (#{movieName},#{movieDesc},#{showDate},#{movieStatus,typeHandler=com.zxc.movie.typeHandle.MovieStatusHandle},#{movieUrl},#{photo},#{keepCount},#{createDate},#{updateDate})
     </insert>
 
     <delete id="delete" parameterType="int">
@@ -11,14 +19,22 @@
     </delete>
 
    <select id="getById" resultMap="movieMap">
-        select id,movie_name,movie_url,status from movie where id = #{id}
+        select <include refid="movie_label"></include> from movie where id = #{id}
    </select>
 
    <resultMap id="movieMap" type="Movie">
        <id property="id" column="id"/>
        <result property="movieName" column="movie_name"/>
+       <result property="movieDesc" column="movie_desc"/>
+       <result property="showDate" column="movie_show"/>
+       <result property="movieStatus" typeHandler="com.zxc.movie.typeHandle.MovieStatusHandle" column="movie_status"/>
        <result property="movieUrl" column="movie_url"/>
-       <result property="status" column="status"/>
+       <result property="photo" column="movie_photo"/>
+       <result property="keepCount" column="keep_count"/>
+       <result property="createDate" column="create_date"/>
+       <result property="updateDate" column="update_date"/>
+
+
    </resultMap>
 
 </mapper>
