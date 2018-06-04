@@ -65,7 +65,7 @@ https://www.cnblogs.com/jeffen/p/6380724.html
 
 mysql的 datetime 类型不支持创建时使用now()函数，还是自己指定吧
 
- <!-- mybatis映射java1.8日期类型LocalDate的依赖-->
+ <!-- mybatis映射java1.8日期类型LocalDate的依赖-->  3.4.5 版本后,Mybatis进行了自己融入,不需要我们再自己手工引入
     <dependency>
       <groupId>org.mybatis</groupId>
       <artifactId>mybatis-typehandlers-jsr310</artifactId>
@@ -74,4 +74,5 @@ mysql的 datetime 类型不支持创建时使用now()函数，还是自己指定
 
     dubbo与mybatis结合时有mybatis懒加载对象的问题,网上也没啥解决方案,自己再瞅瞅！
 
-
+ dubbo版本太低导致的接口调用出现异常，主要是 jdk1.8 LocalDate 与dubbo版本的问题,   2.5.3 不支持,估计其他的也不支持
+ mybatis转换器可以加注解@MappedTypes(MovieStatus.class)  这样就不用在xml文件里面进行标记了
