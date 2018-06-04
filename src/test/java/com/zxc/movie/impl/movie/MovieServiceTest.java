@@ -23,6 +23,7 @@ public class MovieServiceTest extends BaseTest {
     @Test
     public void testInsert() {
         Movie movie = getMovie(10);
+        movie.setUpdateDate(LocalDateTime.now());
         int count = movieService.add(movie);
         System.out.println(count);
     }

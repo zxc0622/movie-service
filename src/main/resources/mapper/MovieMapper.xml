@@ -11,7 +11,7 @@
         insert into movie(
            <include refid="movie_label"></include>
         ) values
-        (#{movieName},#{movieDesc},#{showDate},#{movieStatus,typeHandler=com.zxc.movie.typeHandle.MovieStatusHandle},#{movieUrl},#{photo},#{keepCount},#{createDate},#{updateDate})
+        (#{movieName},#{movieDesc},#{showDate},#{movieStatus},#{movieUrl},#{photo},#{keepCount},#{createDate},#{updateDate})
     </insert>
 
     <delete id="delete" parameterType="int">
@@ -27,7 +27,7 @@
        <result property="movieName" column="movie_name"/>
        <result property="movieDesc" column="movie_desc"/>
        <result property="showDate" column="movie_show"/>
-       <result property="movieStatus" typeHandler="com.zxc.movie.typeHandle.MovieStatusHandle" column="movie_status"/>
+       <result property="movieStatus" column="movie_status"/>
        <result property="movieUrl" column="movie_url"/>
        <result property="photo" column="movie_photo"/>
        <result property="keepCount" column="keep_count"/>

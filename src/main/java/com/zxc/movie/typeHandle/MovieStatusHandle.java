@@ -3,6 +3,7 @@ package com.zxc.movie.typeHandle;
 import com.zxc.movie.common.MovieStatus;
 import org.apache.ibatis.type.BaseTypeHandler;
 import org.apache.ibatis.type.JdbcType;
+import org.apache.ibatis.type.MappedTypes;
 
 import java.sql.CallableStatement;
 import java.sql.PreparedStatement;
@@ -12,6 +13,8 @@ import java.sql.SQLException;
 /**
  * Created by 星驰太帅了 on 2018/06/03.
  */
+//指定该转换器对哪些类起作用,这样在xml文件中就不需要再指定用这个来转换了
+@MappedTypes(MovieStatus.class)
 public class MovieStatusHandle extends BaseTypeHandler<MovieStatus>{
 
     private final MovieStatus[] enums = MovieStatus.values();
