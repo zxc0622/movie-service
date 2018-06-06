@@ -19,7 +19,7 @@
     </delete>
 
    <select id="getById" resultMap="movieMap">
-        select <include refid="movie_label"></include> from movie where id = #{id}
+        select id,<include refid="movie_label"></include> from movie where id = #{id}
    </select>
 
    <resultMap id="movieMap" type="Movie">
