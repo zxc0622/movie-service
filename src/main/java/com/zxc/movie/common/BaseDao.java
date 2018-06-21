@@ -15,10 +15,10 @@ public interface BaseDao <T>{
     public Integer update(T t);
 
     //删除一个对象
-    public Integer delete(Integer id);
+    public Integer delete(Long id);
 
     //获取一个对象
-    public T getById(Integer id);
+    public T getById(Long id);
 
     //获取所有的对象
     public List<T> getAll();

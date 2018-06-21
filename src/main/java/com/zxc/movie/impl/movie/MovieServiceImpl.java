@@ -21,7 +21,7 @@ public class MovieServiceImpl implements MovieService {
 
     @Override
     @LogIgnore
-    public Movie getById(Integer id) {
+    public Movie getById(Long id) {
         return movieMapper.getById(id);
     }
 
